@@ -130,11 +130,11 @@ body {
   box-shadow: var(--glass-shadow);
 }
 
-/* ===== NAVBAR ===== */
+/* ===== NAVBAR - PRODUCTION READY ===== */
 .navbar {
   position: sticky;
   top: var(--spacing-md);
-  z-index: 100;
+  z-index: 1000; /* Increased z-index to ensure it's above everything */
   padding: var(--spacing-xs) var(--spacing-sm);
   max-width: 1300px;
   margin: 0 auto var(--spacing-xl);
@@ -144,6 +144,7 @@ body {
   border: 1px solid var(--glass-border);
   border-radius: 100px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .nav-container {
@@ -151,6 +152,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 1.5rem;
+  position: relative;
 }
 
 .nav-logo {
@@ -161,11 +163,62 @@ body {
   background-clip: text;
   color: transparent;
   text-decoration: none;
+  transition: opacity 0.3s ease;
+  z-index: 1001;
 }
 
+.nav-logo:hover {
+  opacity: 0.9;
+}
+
+/* ===== MOBILE MENU BUTTON ===== */
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001;
+  position: relative;
+}
+
+.mobile-menu-btn span {
+  width: 100%;
+  height: 3px;
+  background: var(--text-primary);
+  border-radius: 3px;
+  transition: transform 0.3s ease-in-out, opacity 0.2s ease-in-out, background-color 0.3s ease;
+  transform-origin: center;
+}
+
+.mobile-menu-btn.active span:nth-child(1) {
+  transform: translateY(10.5px) rotate(45deg);
+}
+
+.mobile-menu-btn.active span:nth-child(2) {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.mobile-menu-btn.active span:nth-child(3) {
+  transform: translateY(-10.5px) rotate(-45deg);
+}
+
+/* ===== NAVIGATION MENU ===== */
 .nav-menu {
   display: flex;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-menu-inner {
+  display: flex;
   gap: var(--spacing-lg);
+  align-items: center;
 }
 
 .nav-link {
@@ -175,6 +228,7 @@ body {
   transition: all 0.3s ease;
   position: relative;
   padding: 0.5rem 0;
+  white-space: nowrap;
 }
 
 .nav-link::after {
@@ -202,6 +256,165 @@ body {
 
 .nav-link.active::after {
   width: 100%;
+}
+
+/* ===== MOBILE MENU BACKDROP ===== */
+.mobile-menu-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  pointer-events: none;
+}
+
+.mobile-menu-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+}
+
+/* ===== THEME TOGGLE ===== */
+.theme-toggle {
+  width: 70px;
+  height: 35px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 40px;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+  box-shadow: 0 0 15px var(--electric-glow);
+  transition: box-shadow 0.3s ease;
+  z-index: 1001;
+}
+
+.theme-toggle i {
+  font-size: 1rem;
+  z-index: 2;
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+}
+
+.theme-toggle .fa-sun {
+  color: #fbbf24;
+}
+
+.theme-toggle .fa-moon {
+  color: #94a3b8;
+}
+
+.toggle-thumb {
+  position: absolute;
+  width: 27px;
+  height: 27px;
+  background: var(--electric-blue);
+  border-radius: 50%;
+  top: 3px;
+  left: 3px;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 15px var(--electric-glow);
+}
+
+body.light .toggle-thumb {
+  transform: translateX(35px);
+}
+
+/* ===== RESPONSIVE DESIGN - MOBILE FIRST APPROACH ===== */
+/* Tablet and Mobile */
+@media (max-width: 1024px) {
+  .navbar {
+    margin: var(--spacing-sm);
+    top: var(--spacing-sm);
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: min(350px, 80%);
+    height: 100vh;
+    background: var(--nav-blur);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-left: 1px solid var(--glass-border);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+    padding: 100px 2rem 2rem;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 999;
+    display: block;
+    overflow-y: auto;
+  }
+
+  .nav-menu.active {
+    right: 0;
+  }
+
+  .nav-menu-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-lg);
+  }
+
+  .nav-link {
+    font-size: 1.2rem;
+    width: 100%;
+    padding: 0.8rem 0;
+  }
+
+  .nav-link::after {
+    bottom: 0.4rem;
+  }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 480px) {
+  .nav-container {
+    padding: 0.5rem var(--spacing-sm);
+  }
+
+  .nav-logo {
+    font-size: 1.2rem;
+  }
+
+  .nav-menu {
+    width: 85%;
+    padding: 90px 1.5rem 1.5rem;
+  }
+
+  .nav-link {
+    font-size: 1.1rem;
+  }
+}
+
+/* Landscape Mode */
+@media (max-height: 600px) and (max-width: 1024px) {
+  .nav-menu {
+    padding: 80px 1.5rem 1.5rem;
+  }
+
+  .nav-menu-inner {
+    gap: var(--spacing-sm);
+  }
+}
+
+/* Prevent body scroll when menu is open */
+body.menu-open {
+  overflow: hidden;
 }
 
 /* ===== THEME TOGGLE ===== */
@@ -1360,5 +1573,76 @@ body.light .toggle-thumb {
   .badge {
     font-size: 0.8rem;
     padding: 0.3rem 0.8rem;
+  }
+}
+/* ===== MOBILE MENU FIXES ===== */
+@media (max-width: 1024px) {
+  .mobile-menu-btn {
+    display: flex !important;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 300px;
+    height: 100vh;
+    background: var(--nav-blur);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-left: 1px solid var(--glass-border);
+    padding: 100px 2rem;
+    transition: right 0.3s ease;
+    z-index: 999;
+    display: block !important;
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .nav-menu.active {
+    right: 0 !important;
+  }
+
+  .nav-menu .nav-menu-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .nav-link {
+    font-size: 1.2rem;
+    width: 100%;
+    padding: 0.8rem 0;
+  }
+
+  /* Backdrop */
+  .mobile-menu-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .mobile-menu-backdrop.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  body.menu-open {
+    overflow: hidden;
+  }
+}
+
+/* Small screens */
+@media (max-width: 480px) {
+  .nav-menu {
+    width: 85%;
+    padding: 80px 1.5rem;
   }
 }

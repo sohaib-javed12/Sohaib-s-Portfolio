@@ -26,32 +26,45 @@
   <div class="gradient-orb orb-4"></div>
 
   <!-- Sticky Glass Navbar with all sections -->
-  <nav class="navbar">
+  <nav class="navbar" aria-label="Main navigation">
     <div class="nav-container">
-      <a href="#" class="nav-logo">Sohaib Javed</a>
+      <a href="#" class="nav-logo" aria-label="Home">Sohaib Javed</a>
       
-      <div class="nav-menu">
-        <a href="#home" class="nav-link active">Home</a>
-        <a href="#about" class="nav-link">About Me</a>
-        <a href="#skills" class="nav-link">Skills</a>
-        <a href="#services" class="nav-link">My Services</a>
-        <a href="#contact" class="nav-link">Contact</a>
+      <!-- Mobile Menu Toggle with ARIA -->
+      <button 
+        class="mobile-menu-btn" id="mobileMenuBtn"
+        id="mobileMenuBtn"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="navMenu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
+      <!-- Navigation Menu -->
+      <div class="nav-menu" id="navMenu">
+        <div class="nav-menu-inner">
+          <a href="#home" class="nav-link active">Home</a>
+          <a href="#about" class="nav-link">About Me</a>
+          <a href="#skills" class="nav-link">Skills</a>
+          <a href="#services" class="nav-link">My Services</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </div>
       </div>
 
       <!-- Dark/Light Toggle -->
-      <div class="theme-toggle" id="themeToggle">
-        <i class="fas fa-sun"></i>
-        <i class="fas fa-moon"></i>
+      <div class="theme-toggle" id="themeToggle" role="switch" aria-checked="false" aria-label="Toggle dark mode">
+        <i class="fas fa-sun" aria-hidden="true"></i>
+        <i class="fas fa-moon" aria-hidden="true"></i>
         <div class="toggle-thumb"></div>
-      </div>
-
-      <div class="mobile-menu-btn">
-        <span></span>
-        <span></span>
-        <span></span>
       </div>
     </div>
   </nav>
+
+  <!-- Mobile Menu Backdrop -->
+  <div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
 
   <main>
     <!-- HOME SECTION with Photo - SCROLL INDICATOR REMOVED -->
@@ -505,10 +518,10 @@
             </div>
             
             <div class="contact-social">
-              <a href="https://github.com/sohaib-javed12" class="social-icon"><i class="fab fa-github" style="color: #000;"></i></a>
-              <a href="https://www.linkedin.com/in/sohaib-javed-7027313b0/" class="social-icon"><i class="fab fa-linkedin-in" style="color: #0077B5;"></i></a>
-              <a href="https://x.com/Sohaib__Qayoumi" class="social-icon"><i class="fab fa-twitter" style="color: #0077B5;"></i></a>
-              <a href="https://www.instagram.com/mr_jalalzai45" class="social-icon"><i class="fab fa-instagram" style="color: #d124f4;"></i></a>
+              <a href="https://github.com/sohaib-javed12" class="social-icon" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              <a href="https://www.linkedin.com/in/sohaib-javed-7027313b0/" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="https://x.com/Sohaib__Qayoumi" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="https://www.instagram.com/mr_jalalzai45" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
             </div>
           </div>
           
@@ -559,10 +572,10 @@
             <div class="footer-logo">SJ</div>
             <p class="footer-tagline">Engineering digital excellence, one scalable system at a time.</p>
             <div class="footer-social">
-              <a href="https://github.com/sohaib-javed12" class="footer-social-link"><i class="fab fa-github"></i></a>
-              <a href="https://www.linkedin.com/in/sohaib-javed-7027313b0/" class="footer-social-link"><i class="fab fa-linkedin-in"></i></a>
-              <a href="https://x.com/Sohaib__Qayoumi" class="footer-social-link"><i class="fab fa-twitter"></i></a>
-              <a href="https://www.instagram.com/mr_jalalzai45" class="footer-social-link"><i class="fab fa-instagram"></i></a>
+              <a href="https://github.com/sohaib-javed12" class="footer-social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              <a href="https://www.linkedin.com/in/sohaib-javed-7027313b0/" class="footer-social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="https://x.com/Sohaib__Qayoumi" class="footer-social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="https://www.instagram.com/mr_jalalzai45" class="footer-social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
             </div>
           </div>
           
